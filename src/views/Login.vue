@@ -26,6 +26,7 @@ export default {
     ...mapActions(['saveUser']),
     login(){
       // console.log(this.usuario);
+      
       this.axios.post('/login', this.user)
         .then(res => {
           console.log(res.data);
@@ -35,7 +36,7 @@ export default {
         })
         .catch(e => {
           console.log(e.response);
-          this.message = e.response.data.message
+          this.message =  "error"
         })
     }
   }
