@@ -149,7 +149,7 @@
       </ul>
     </nav>
 
-    <p>Total Contacts: {{ totalContacts }} - Total Page: {{ totalPage }}</p>
+    <p>Total Contacts: {{ totalContacts }} - Total Page: {{ quantityPages }}</p>
   </div>
 </template>
 
@@ -174,7 +174,6 @@ export default {
       contactEdit: {},
       totalContacts: 0,
       limit: 5,
-      totalPage: 0,
       pageActive: 1,
     }
   },
@@ -317,7 +316,7 @@ export default {
         .then((res) => {
           console.log('pagination', res.data)
           this.contacts = res.data.result || []
-          this.totalContacts = res.data.result.length || 0
+          this.totalContacts = res.data.total || 0
         })
         .catch((e) => {
           console.log(e.response)

@@ -10,6 +10,11 @@ const router =  new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
@@ -17,27 +22,23 @@ const router =  new Router({
     {
       path: '/contact',
       name: 'contact',
-      component: () => import(/* webpackChunkName: "about" */ './views/Contact.vue'),
+      component: () => import(/* webpackChunkName: "contact" */ './views/Contact.vue'),
       meta: {requireAuth: true}
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
-    },
+    
     {
       path: '/register',
       name: 'register',
-      component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')
+      component: () => import(/* webpackChunkName: "register" */ './views/Register.vue')
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
 
-  const rutaProtegida = to.matched.some(record => record.meta.requireAuth)
+  const routeProtected = to.matched.some(record => record.meta.requireAuth)
 
-  if(rutaProtegida && store.state.token === ''){
+  if(routeProtected && store.state.token === ''){
 
     next({name: 'login'});
 

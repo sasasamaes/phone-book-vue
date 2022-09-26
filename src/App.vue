@@ -1,12 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login"  v-if="!isActive">Login</router-link> |
-      <a @click="logOut()"  v-if="isActive">Cerrar Sesion</a> |
-      <router-link to="/notas" v-if="isActive">Notas</router-link>
-    </div> -->
     <div>
       <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-brand href="#">PhoneBook 📒</b-navbar-brand>
@@ -15,7 +8,7 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item to="/login" v-if="!isActive">Login</b-nav-item>
+            <b-nav-item to="/" v-if="!isActive">Login</b-nav-item>
             <b-nav-item to="/register" v-if="!isActive">Register</b-nav-item>
 
           </b-navbar-nav>
