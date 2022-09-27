@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-4">
     <h1>Register User</h1>
     <form @submit.prevent="register">
       <input type="text" placeholder="First Name" class="form-control my-2" v-model="user.firstName">

@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container mt-4">
     <h1>PhoneBook</h1>
+
     <b-alert
       :show="dismissCountDown"
       dismissible
@@ -11,145 +12,159 @@
       {{ message.text }}
     </b-alert>
 
-    <form @submit.prevent="editContact(contactEdit)" v-if="edit">
-      <h3>Edit contact</h3>
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="First Name"
-        v-model="contactEdit.firstName"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Last Name"
-        v-model="contactEdit.lastName"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Email"
-        v-model="contactEdit.email"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Phone"
-        v-model="contactEdit.phone"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Address"
-        v-model="contactEdit.address"
-      />
+    <div class="row">
+      <div class="col-12">
+        <form @submit.prevent="editContact(contactEdit)" v-if="edit">
+          <h3>Edit contact</h3>
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="First Name"
+            v-model="contactEdit.firstName"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Last Name"
+            v-model="contactEdit.lastName"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Email"
+            v-model="contactEdit.email"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Phone"
+            v-model="contactEdit.phone"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Address"
+            v-model="contactEdit.address"
+          />
 
-      <b-button class="btn-warning my-2 mx-2" type="submit">Edit</b-button>
-      <b-button class="my-2" type="submit" @click="edit = false"
-        >Cancel</b-button
-      >
-    </form>
-
-    <form @submit.prevent="saveContact()" v-if="!edit">
-      <h3>Add new contact</h3>
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="First Name"
-        v-model="contact.firstName"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Last Name"
-        v-model="contact.lastName"
-      />
-      <input
-        type="email"
-        class="form-control my-2"
-        placeholder="Email"
-        v-model="contact.email"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Phone"
-        v-model="contact.phone"
-      />
-      <input
-        type="text"
-        class="form-control my-2"
-        placeholder="Address"
-        v-model="contact.address"
-      />
-      <b-button class="btn-success my-2 btn-block" type="submit">Save</b-button>
-    </form>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Address</th>
-          <th scope="col">Handlers</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in contacts" :key="index">
-          <td>{{ item.firstName + ' ' + item.lastName }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.phone }}</td>
-          <td>{{ item.address }}</td>
-          <td>
-            <!-- <b-button @click="alerta()">Acción</b-button> -->
-            <b-button
-              @click="deleteContact(item._id)"
-              class="btn-danger btn-sm mx-2"
-              >Delete
-            </b-button>
-            <b-button @click="ActiveEdit(item._id)" class="btn-warning btn-sm"
-              >Edit
-            </b-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item" :class="{ disabled: pageActive === 1 }">
-          <router-link
-            class="page-link"
-            :to="{ query: { page: pageActive - 1 } }"
-            >Last Page</router-link
+          <b-button class="btn-warning my-2 mx-2" type="submit">Edit</b-button>
+          <b-button class="my-2" type="submit" @click="edit = false"
+            >Cancel</b-button
           >
-        </li>
-        <li
-          class="page-item"
-          :class="{ active: pageActive === index + 1 }"
-          v-for="(item, index) in quantityPages"
-          :key="index"
-        >
-          <router-link
-            :to="{ query: { page: index + 1 } }"
-            class="page-link"
-            >{{ index + 1 }}</router-link
-          >
-        </li>
-        <li
-          class="page-item"
-          :class="{ disabled: pageActive === quantityPages }"
-        >
-          <router-link
-            class="page-link"
-            :to="{ query: { page: pageActive + 1 } }"
-            >Next Page</router-link
-          >
-        </li>
-      </ul>
-    </nav>
+        </form>
 
-    <p>Total Contacts: {{ totalContacts }} - Total Page: {{ quantityPages }}</p>
+        <form @submit.prevent="saveContact()" v-if="!edit">
+          <h3>Add new contact</h3>
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="First Name"
+            v-model="contact.firstName"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Last Name"
+            v-model="contact.lastName"
+          />
+          <input
+            type="email"
+            class="form-control my-2"
+            placeholder="Email"
+            v-model="contact.email"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Phone"
+            v-model="contact.phone"
+          />
+          <input
+            type="text"
+            class="form-control my-2"
+            placeholder="Address"
+            v-model="contact.address"
+          />
+          <b-button class="btn-success my-2 btn-block" type="submit"
+            >Save</b-button
+          >
+        </form>
+      </div>
+      <div class="col-12 w-100 overflow-auto">
+        <table class="table mt-4 w-auto">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Address</th>
+              <th scope="col">Handlers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in contacts" :key="index">
+              <td>{{ item.firstName + ' ' + item.lastName }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.phone }}</td>
+              <td>{{ item.address }}</td>
+              <td>
+                <!-- <b-button @click="alerta()">Acción</b-button> -->
+                <b-button
+                  @click="deleteContact(item._id)"
+                  class="btn-danger btn-sm mx-2"
+                  >Delete
+                </b-button>
+                <b-button
+                  @click="ActiveEdit(item._id)"
+                  class="btn-warning btn-sm "
+                  >Edit
+                </b-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12  d-flex justify-content-center mt-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" :class="{ disabled: pageActive === 1 }">
+              <router-link
+                class="page-link"
+                :to="{ query: { page: pageActive - 1 } }"
+                >Last Page</router-link
+              >
+            </li>
+            <li
+              class="page-item"
+              :class="{ active: pageActive === index + 1 }"
+              v-for="(item, index) in quantityPages"
+              :key="index"
+            >
+              <router-link
+                :to="{ query: { page: index + 1 } }"
+                class="page-link"
+                >{{ index + 1 }}</router-link
+              >
+            </li>
+            <li
+              class="page-item"
+              :class="{ disabled: pageActive === quantityPages }"
+            >
+              <router-link
+                class="page-link"
+                :to="{ query: { page: pageActive + 1 } }"
+                >Next Page</router-link
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-12  d-flex justify-content-center mt-4">
+         <p>
+          Total Contacts: {{ totalContacts }} - Total Page: {{ quantityPages }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -177,16 +192,16 @@ export default {
       pageActive: 1,
     }
   },
-    watch: {
-    "$route.query.page": {
+  watch: {
+    '$route.query.page': {
       immediate: true,
       handler(page) {
-        page = parseInt(page) || 1;
-        console.log('pagina', page);
-        this.pagination(page);
+        page = parseInt(page) || 1
+        console.log('pagina', page)
+        this.pagination(page)
         this.pageActive = page
-      }
-    }
+      },
+    },
   },
   computed: {
     ...mapState(['token']),
