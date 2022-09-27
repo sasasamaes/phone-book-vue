@@ -52,9 +52,9 @@
             >Cancel</b-button
           >
         </form>
-
-        <form @submit.prevent="saveContact()" v-if="!edit">
-          <h3>Add new contact</h3>
+        <h3>Add new contact</h3>
+        <form @submit.prevent="saveContact()" v-if="!edit" class="mt-4">
+        
           <input
             type="text"
             class="form-control my-2"
@@ -85,7 +85,7 @@
             placeholder="Address"
             v-model="contact.address"
           />
-          <b-button class="btn-success my-2 btn-block" type="submit"
+          <b-button class="btn-success my-2 btn-block mt-4" type="submit"
             >Save</b-button
           >
         </form>
