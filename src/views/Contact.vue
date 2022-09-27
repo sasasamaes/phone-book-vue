@@ -91,7 +91,7 @@
         </form>
       </div>
       <div class="col-12 w-100 overflow-auto">
-        <table class="table mt-4 w-auto">
+        <table class="table mt-4">
           <thead>
             <tr>
               <th scope="col">Name</th>
